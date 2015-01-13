@@ -1,0 +1,41 @@
+import org.gradle.api.publish.maven.MavenPublication
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+dependencies {
+
+    compile gradleApi()
+    compile 'com.amazonaws:aws-java-sdk:1.9.3'
+    compile 'com.google.guava:guava:17.0'
+
+    compile 'org.slf4j:slf4j-api:1.7.9'
+    compile 'org.slf4j:slf4j-simple:1.7.9'
+
+    testCompile 'junit:junit:4.11'
+
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId 'com.github.anpilov'
+            artifactId 'gradle-aws-deploy'
+            version '1.0-SNAPSHOT'
+
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
